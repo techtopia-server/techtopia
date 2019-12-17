@@ -3,7 +3,8 @@ shift
 SCRIPT_NAME=$1
 shift
 
-STACKDIR="$STACK_LOCATION/$STACK_NAME"
+export STACKDIR="$STACK_LOCATION/$STACK_NAME"
+export COMPOSE_FILE="$STACK_LOCATION/$STACK_NAME/docker-compose.yml"
 INIT_FILE="$STACK_DIR/init.sh"
 if [ -f "$INIT_FILE" ]; then
   bash "$INIT_FILE"
