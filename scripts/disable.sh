@@ -1,0 +1,8 @@
+STACK_NAME=$1
+CURRENT_DIR="$STACK_LOCATION/$STACK_NAME"
+ENABLE_FILE="$CURRENT_DIR/enabled"
+
+if [ ! -f "$ENABLE_FILE" ]; then
+  rm -f "$ENABLE_FILE"
+fi
+bash "$SCRIPT_DIR/single.sh/$STACK_NAME" down

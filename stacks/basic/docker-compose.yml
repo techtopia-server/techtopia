@@ -1,0 +1,57 @@
+version: '3'
+services:
+  loadbalancer:
+    image: traefik:latest
+    container_name: "loadbalancer"
+    restart: unless-stopped
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=webapp"
+      - "--entrypoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesResolvers.leresolver.acme.email=${EMAIL}"
+      - "--certificatesResolvers.leresolver.acme.storage=/acme.json"
+      - "--certificatesResolvers.leresolver.acme.httpChallenge.entryPoint=web"
+      - "--certificatesresolvers.leresolver.acme.tlschallenge=true"
+      - "--certificatesResolvers.leresolver.acme.dnsChallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
+    networks:
+      - "webapp"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "${LOCAL_IP}:8081:8080"
+    volumes:
+      - "$STACK_DATA/traefik/acme/acme.json:/acme.json"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.redirs.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.redirs.entrypoints=web"
+      - "traefik.http.routers.redirs.middlewares=redirect-to-https"
+  backup:
+    image: duplicati/duplicati
+    container_name: "backup"
+    restart: unless-stopped
+    networks:
+      - backup
+    ports:
+      - "$LOCAL_IP:8200:8200"
+    volumes:
+      - "$STACK_DATA/backup/data:/data"
+      - "$MEDIA_LOCATION:/media:ro"
+      - "$DATA_LOCATION:/server:ro"
+  updates:
+    image: containrrr/watchtower
+    networks:
+      - updates
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+networks:
+  updates:
+  backup:
+  webapp:
+    external:
+      name: 'webapp'

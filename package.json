@@ -1,0 +1,10 @@
+{
+  "name": "techtopia",
+  "private": true,
+  "version": "1.0.0",
+  "author": "Morten Olsen <morten@olsen.pro>",
+  "license": "MIT",
+  "bin": {
+    "techtopia": "./scripts/techtopia.sh"
+  }
+}

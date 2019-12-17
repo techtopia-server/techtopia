@@ -1,0 +1,10 @@
+/data
+/.env.sh
+/backups
+/media
+/stacks/*/enabled
+/*.ovpn
+/stacks/ducktapesp
+
+/stacks/*
+!/stacks/basic

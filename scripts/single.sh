@@ -1,0 +1,8 @@
+#!/bin/bash
+
+STACK_NAME=$1
+shift
+ARGS=$@
+
+CURRENT_DIR="$STACK_LOCATION/$STACK_NAME"
+bash "$SCRIPT_DIR/run.sh" "$CURRENT_DIR" $ARGS
