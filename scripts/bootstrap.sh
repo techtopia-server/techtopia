@@ -4,6 +4,7 @@ export ROOT_DIR=$(realpath "$SCRIPT_DIR/..")
 export DATA_LOCATION="$ROOT_DIR/data"
 export STACK_LOCATION="$ROOT_DIR/stacks"
 export MEDIA_LOCATION="$ROOT_DIR/media"
+export LOCAL_IP="127.0.0.1"
 ARGS=$@
 
 if [ -f "$ROOT_DIR/.env.sh" ]; then
