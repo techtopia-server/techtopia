@@ -5,6 +5,7 @@ REQUIRE_VAR "STACK_DATA"
 REQUIRE_VAR "MEDIA_LOCATION"
 REQUIRE_VAR "DATA_LOCATION"
 
+mkdir -p "$STACK_DATA/traefik/acme"
 ACME_FILE="$STACK_DATA/traefik/acme/acme.json"
 
 if [ ! -f "$ACME_FILE" ]; then
