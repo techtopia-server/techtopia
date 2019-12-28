@@ -1,0 +1,9 @@
+STACK_NAME=$1
+shift
+
+(
+  export STACKDIR="$STACK_LOCATION/$STACK_NAME"
+  cd $STACKDIR
+  export STACK_DATA="$DATA_LOCATION/$STACK_NAME"
+  git $@
+)

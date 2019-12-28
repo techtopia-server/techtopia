@@ -32,6 +32,9 @@ case "$COMMAND" in
   run)
     bash "$SCRIPT_DIR/stack-script.sh" $@
     ;;
+  git)
+    bash "$SCRIPT_DIR/git.sh" $@
+    ;;
   install)
     bash "$SCRIPT_DIR/install.sh" $@
     ;;

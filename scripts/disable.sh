@@ -5,4 +5,4 @@ ENABLE_FILE="$CURRENT_DIR/enabled"
 if [ ! -f "$ENABLE_FILE" ]; then
   rm -f "$ENABLE_FILE"
 fi
-bash "$SCRIPT_DIR/single.sh/$STACK_NAME" down
+bash "$SCRIPT_DIR/single.sh" "$STACK_NAME" down
