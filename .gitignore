@@ -2,9 +2,8 @@
 /.env.sh
 /backups
 /media
-/stacks/*/enabled
+/enabled
 /*.ovpn
-/stacks/ducktapesp
 
 /stacks/*
 !/stacks/basic
